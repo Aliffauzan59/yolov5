@@ -170,7 +170,31 @@ def run(
                     if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
                         label = None if hide_labels else (names[c] if hide_conf else f'{names[c]} {conf:.2f}')
-                        annotator.box_label(xyxy, label, color=colors(c, True))
+                        #annotator.box_label(xyxy, label, color=colors(c, True))
+                        
+                        x1 = int(xyxy[0].item())
+                        y1 = int(xyxy[1].item())
+                        x2 = int(xyxy[2].item())
+                        y2 = int(xyxy[3].item())
+                        
+                        #jarak
+                        FOVH = 65.5
+                        FOVV = 51.6
+
+                        box_width = x2-x1
+                        box_height = y2-y1
+
+                        object_width = 0.6
+                        object_height = 0.6
+                        
+                        eq_angle = (box_height/im0.shape[0])*FOVV
+                        distance = (object_height/2)/math.tan(math.radians(eq_angle/2))
+                      
+                        color = (250,200,0)
+                        cv2.rectangle(im0,(x1,y1), (x2,y2), color, 2)
+                        cv2.putText(im0, label,(x1,y1),cv2.FONT_HERSHEY_COMPLEX, 0.4,(255,0,0),1)
+                        cv2.putText(im0, f'{distance:2f} M',(x1,y2),cv2.FONT_HERSHEY_COMPLEX, 0.4,(255,0,0),1)
+                        
                     if save_crop:
                         save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
