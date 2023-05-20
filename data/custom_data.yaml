@@ -1,0 +1,15 @@
+
+train: ../traindata/images/train/  # train images (relative to 'path')
+val: ../traindata/images/val/  # test images (relative to 'path')
+
+#number of classes
+nc: 4
+
+# Classes
+names:
+  0: batas kecepatan 60 km
+  1: batas kecepatan 80 km
+  2: batas kecepatan 30 km
+  3: batas kecepatan 40 km
+
+  
