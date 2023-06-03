@@ -184,11 +184,10 @@ def run(
                         box_width = x2-x1
                         box_height = y2-y1
 
-                        object_width = 0.6
-                        object_height = 0.6
+                        object_diameter = 0.6
                         
                         eq_angle = (box_height/im0.shape[0])*FOVV
-                        distance = (object_height/2)/math.tan(math.radians(eq_angle/2))
+                        distance = (object_diameter/2)/math.tan(math.radians(eq_angle/2))
                       
                         color = (250,200,0)
                         cv2.rectangle(im0,(x1,y1), (x2,y2), color, 2)
